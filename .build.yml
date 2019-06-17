@@ -1,4 +1,4 @@
-image: debian/stretch
+image: alpine/edge
 packages:
   - rsync
 sources:
@@ -12,7 +12,5 @@ triggers:
     condition: always
     to: notify@jrgnsn.net
 tasks:
-  - deploy: |
-      cd playground
-      sshopts="-o StrictHostKeyChecking=no"
-      rsync --rsh="ssh $sshopts" -rP . ${deploy}:/var/www/playground/
+  - deploy:
+      rsync  -rP --exclude ".git" playground/ ${deploy}:/var/www/playground/
