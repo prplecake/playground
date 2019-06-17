@@ -6,7 +6,7 @@ sources:
 environment:
   deploy: deploy@playground.jrgnsn.net
 secrets:
-  - 65617e27-4d70-4a57-9688-22a2fe0bc6c0
+  - 23f64fde-b028-4f42-83d9-5fd851c76406
 triggers:
   - action: email
     condition: always
