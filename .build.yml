@@ -13,4 +13,5 @@ triggers:
     to: notify@jrgnsn.net
 tasks:
   - deploy:
-      rsync  -rP --exclude ".git" playground/ ${deploy}:/var/www/playground/
+      sshopts="-o StrictHostKeyChecking=no"
+      rsync --rsh="ssh -vvv $sshopts" -rP --exclude ".git" playground/ ${deploy}:/var/www/playground/
