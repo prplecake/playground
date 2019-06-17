@@ -1,0 +1,18 @@
+image: debian/stretch
+packages:
+  - rsync
+sources:
+  - https://git.sr.ht/~mjorgensen/playground
+environment:
+  deploy: deploy@playground.jrgnsn.net
+secrets:
+  - 65617e27-4d70-4a57-9688-22a2fe0bc6c0
+triggers:
+  - action: email
+    condition: always
+    to: notify@jrgnsn.net
+tasks:
+  - deploy: |
+      cd playground
+      sshopts="-o StrictHostKeyChecking=no"
+      rsync --rsh="ssh $sshopts" -rP . ${deploy}:/var/www/playground/
