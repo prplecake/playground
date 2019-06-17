@@ -6,12 +6,12 @@ sources:
 environment:
   deploy: deploy@playground.jrgnsn.net
 secrets:
-  - 23f64fde-b028-4f42-83d9-5fd851c76406
+  - 7a042c0a-91f1-4e14-b2cb-5e1aaf23411e
 triggers:
   - action: email
     condition: always
     to: notify@jrgnsn.net
 tasks:
-  - deploy:
+  - deploy: | 
       sshopts="-o StrictHostKeyChecking=no"
-      rsync --rsh="ssh -vvv $sshopts" -rP --exclude ".git" playground/ ${deploy}:/var/www/playground/
+      rsync --rsh="ssh $sshopts" -rP --exclude ".git" playground/ ${deploy}:/var/www/playground/
