@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>playground - jrgnsn.net</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+    <div class="content">
+        <div>
+            Range: <input type="range" id="range" value="0" step="1" min="0" max="10" list="steplist" />
+            <datalist id="steplist">
+                <option>0</option>
+                <option>5</option>
+                <option>10</option>
+            </datalist>
+        </div>
+        <div id="rangeValue">
+
+        </div>
+        <script type="text/javascript">
+            var slider = document.getElementById("range"),
+                output = document.getElementById("rangeValue");
+            output.innerHTML = slider.value;
+
+            // Update the current slider value (each time the slider is moved)
+            slider.oninput = function () {
+                output.innerHTML = this.value;
+            }
+        </script>
+    </div>
+</body>
+
+</html>
