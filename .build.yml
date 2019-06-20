@@ -1,6 +1,9 @@
-image: alpine/edge
+image: debian/stretch
 packages:
   - rsync
+  - ruby
+  - ruby-dev
+  - zlib1g-dev
 sources:
   - https://git.sr.ht/~mjorgensen/playground
 environment:
@@ -12,6 +15,13 @@ triggers:
     condition: always
     to: notify@jrgnsn.net
 tasks:
+  - setup: sudo gem install bundler github-pages -N
+  - build: |
+      cd playground
+      bundle install
+      bundle exec jekyll build
   - deploy: | 
+      cd playground
       sshopts="-o StrictHostKeyChecking=no"
-      rsync --rsh="ssh $sshopts" -rP --exclude ".git" playground/ ${deploy}:/var/www/playground/
+      rsync --rsh="ssh $sshopts" -rP _site/ ${deploy}:/var/www/playground/
+
