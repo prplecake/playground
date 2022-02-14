@@ -14,10 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install ruby
-      runs: |
+      run: |
         sudo apt install ruby ruby-dev
     - name: Install dependencies
-      runs: |
+      run: |
         sudo apt install zlib1g-dev
         sudo gem install bundler github-pages -N
     - name: Build the site in the jekyll/builder container
