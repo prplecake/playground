@@ -20,7 +20,7 @@ jobs:
       run: |
         sudo apt install zlib1g-dev
         sudo gem install bundler github-pages -N
-    - name: Build the site in the jekyll/builder container
+    - name: Build the site
       run: |
         bundle install
         bundle exec jekyll build
