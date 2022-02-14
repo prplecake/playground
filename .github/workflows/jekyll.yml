@@ -1,0 +1,26 @@
+name: Jekyll site CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install ruby
+      run: |
+        sudo apt install ruby ruby-dev
+    - name: Install dependencies
+      run: |
+        sudo apt install zlib1g-dev
+        sudo gem install bundler github-pages -N
+    - name: Build the site in the jekyll/builder container
+      run: |
+        bundle install
+        bundle exec jekyll build
