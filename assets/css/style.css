@@ -16,11 +16,6 @@ body {
     background-color: #eee;
 }
 
-.container {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-}
-
 textarea {
     font-family: serif;
     resize: both;    
