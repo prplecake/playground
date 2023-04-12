@@ -3,22 +3,25 @@ name: Build
 on:
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
-    - name: Install ruby
-      run: |
-        sudo apt install ruby ruby-dev
-    - name: Install dependencies
-      run: |
-        sudo apt install zlib1g-dev
-        sudo gem install bundler github-pages -N
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+        cache-version: 1 # Increment this number if you need to re-download cached gems
+    - name: Setup Pages
+      id: pages
+      uses: actions/configure-pages@v3
     - name: Build the site
-      run: |
-        bundle install
-        bundle exec jekyll build
+      run: bundle exec jekyll build
+      env:
+        JEKYLL_ENV: production
+    - name: Upload artifact
+      # Automatically uploads an artifact from the './_site' directory by default
+      uses: actions/upload-pages-artifact@v1
