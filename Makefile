@@ -13,7 +13,7 @@ check: install
 	$(JEKYLL) doctor
 
 install: $(PROJECT_DEPS)
-	$(BUNDLE) install --path vendor/bundle
+	$(BUNDLE) install
 
 update: $(PROJECT_DEPS)
 	$(BUNDLE) update
